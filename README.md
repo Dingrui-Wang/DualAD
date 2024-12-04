@@ -71,18 +71,28 @@ You should now see a view similar to the following:
 
 ![Visualization Example](./assets/bokeh_plot.png)
 
-## Performance
+## Results
 
-DualAD demonstrates improved performance in challenging scenarios compared to other planners. Key metrics such as **Non-Reactive Closed-Loop Score (NR-CLS)** and **Reactive Closed-Loop Score (R-CLS)**. The results showcase DualAD’s ability to outperform rule-based and learning-based SOTA on Hard-55 benchmark in R-CLS metric.
+### Hard-55 benchmark
 
-| Planner                  | Hard-55 R-CLS | Super-Hard-24 R-CLS |
-|--------------------------|-------------|--------------------|
-| IDM                      | 34.56       | 20.73             |
-| Lattice-IDM              | 39.76       | 33.83             |
-| PDM-Closed               | 35.15       | 7.57             |
-| PlanTF                   | 53,60       | **51.30**             |
-| **DualAD (Lattice-IDM + GLM-Flash-4)** | **57.31**   | 46.03         |
+| Planner                                 | Hard-55 R-CLS | Super-Hard-24 R-CLS |
+|-----------------------------------------|---------------|---------------------|
+| Log-replay (Expert)                     | 58.32         |   48.70             |
+| IDM                                     | 34.56         |   20.73             |
+| Lattice-IDM                             | 39.76         |   33.83             |
+| PDM-Closed (Rule-based SOTA)            | 35.15         |   7.57              |
+| PlanTF (Learning-based SOTA)            | 53,60         | **51.30**           |
+| **DualAD (Lattice-IDM + GLM-Flash-4)**  | **57.31**     |   46.03             |
 
+
+### Highlight
+Using a relatively weak LLM (GLM-Flash-4), the integrated model achieves performance comparable to that of a human expert.
+
+| Planner                                 | Hard-55 R-CLS | Super-Hard-24 R-CLS |
+|-----------------------------------------|---------------|---------------------|
+| Log-replay (Expert)                     | 58.32         |   48.70             |
+| Lattice-IDM                             | 39.76         |   33.83             |
+| **DualAD (Lattice-IDM + GLM-Flash-4)**  | 57.31         |   46.03             |
 
 ## Credits
 
@@ -100,5 +110,6 @@ DualAD demonstrates improved performance in challenging scenarios compared to ot
 
 - [https://github.com/motional/nuplan-devkit](https://github.com/motional/nuplan-devkit)
 - [https://github.com/huggingface/huggingface_hub](https://github.com/huggingface/huggingface_hub)
+- [https://github.com/MCZhi/GameFormer-Planner](https://github.com/MCZhi/GameFormer-Planner)
 - [https://github.com/autonomousvision/tuplan_garage](https://github.com/autonomousvision/tuplan_garage)
 - [https://github.com/jchengai/planTF](https://github.com/jchengai/planTF)
