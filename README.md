@@ -94,7 +94,7 @@ Using a relatively weak LLM (GLM-Flash-4), the integrated model achieves perform
 | Lattice-IDM                             | 39.76         |   33.83             |
 | **DualAD (Lattice-IDM + GLM-Flash-4)**  | 57.31         |   46.03             |
 
-## Credits
+## Citation
 
 ```text
 @article{wang2024dualad,
