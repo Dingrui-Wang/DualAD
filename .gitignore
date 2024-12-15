@@ -32,3 +32,5 @@ _ext
 .pytest_cache/*
 docs/_build/
 docs/generated/
+nuplan/planning/script/config/nuboard/default_nuboard.yaml
+nuplan/planning/script/config/simulation/default_simulation.yaml

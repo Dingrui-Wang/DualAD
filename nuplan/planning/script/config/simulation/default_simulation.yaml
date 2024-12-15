@@ -5,8 +5,6 @@ hydra:
   searchpath:
   - pkg://nuplan.planning.script.config.common
   - pkg://nuplan.planning.script.experiments 
-
-
 defaults:
   # Add ungrouped items
   - default_experiment

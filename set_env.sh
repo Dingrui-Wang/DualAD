@@ -21,7 +21,8 @@ yaml_file="$current_dir/nuplan/planning/script/config/simulation/default_simulat
 # Use sed to replace the searchpath values in the YAML file
 sed -i '/searchpath:/,/^  - / s/^  - .*//' "$yaml_file"
 sed -i '/searchpath:/,/^  - / s/^  - .*//' "$yaml_file"
-sed -i "/searchpath:/a \ \ - $path_a\n  - $path_b" "$yaml_file"
+sed -i "/searchpath:/a \ \ - $path_a\n\ \ - $path_b" "$yaml_file"
+sed -i '/searchpath:/,/defaults:/ {/^$/d;}' "$yaml_file"
 
 # Path to the YAML file
 yaml_file="$current_dir/nuplan/planning/script/config/nuboard/default_nuboard.yaml"
@@ -29,4 +30,5 @@ yaml_file="$current_dir/nuplan/planning/script/config/nuboard/default_nuboard.ya
 # Use sed to replace the searchpath values in the YAML file
 sed -i '/searchpath:/,/^  - / s/^  - .*//' "$yaml_file"
 sed -i '/searchpath:/,/^  - / s/^  - .*//' "$yaml_file"
-sed -i "/searchpath:/a \ \ - $path_a\n  - $path_b" "$yaml_file"
+sed -i "/searchpath:/a \ \ - $path_a\n\ \ - $path_b" "$yaml_file"
+sed -i '/searchpath:/,/defaults:/ {/^$/d;}' "$yaml_file"

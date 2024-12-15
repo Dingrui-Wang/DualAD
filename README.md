@@ -28,7 +28,6 @@
    conda create -n dualad python=3.9
    conda activate dualad
    pip install -e .
-   pip install -r requirements_torch.txt
    pip install -r requirements.txt
    ```
 
