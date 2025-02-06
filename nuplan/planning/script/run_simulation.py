@@ -4,6 +4,9 @@ from pathlib import Path
 from shutil import rmtree
 from typing import List, Optional, Union
 
+import pprint
+import pandas as pd
+
 import hydra
 import pytorch_lightning as pl
 from omegaconf import DictConfig, OmegaConf
@@ -33,6 +36,14 @@ if os.path.basename(CONFIG_PATH) != 'simulation':
     CONFIG_PATH = os.path.join(CONFIG_PATH, 'simulation')
 CONFIG_NAME = 'default_simulation'
 
+def print_simulation_results(result_path):
+    root = Path(result_path) / "aggregator_metric"
+    result = list(root.glob("*.parquet"))
+    result = max(result, key=lambda item: item.stat().st_ctime)
+    df = pd.read_parquet(result)
+    final_score = df[df["scenario"] == "final_score"]
+    final_score = final_score.to_dict(orient="records")[0]
+    pprint.PrettyPrinter(indent=4).pprint(final_score)
 
 def run_simulation(cfg: DictConfig, planners: Optional[Union[AbstractPlanner, List[AbstractPlanner]]] = None) -> None:
     """
@@ -114,12 +125,14 @@ def main(cfg: DictConfig) -> None:
     if is_s3_path(Path(cfg.output_dir)):
         clean_up_s3_artifacts()
 
+    print_simulation_results(cfg.output_dir)
+
 import tempfile
 if __name__ == '__main__':
 
 
     NUPLAN_EXP_ROOT = os.getenv('NUPLAN_EXP_ROOT')
-    BENCHMARK = 'Hard' # SuperHard Hard
+    BENCHMARK = 'simulation_test_split' # SuperHard Hard simulation_test_split
     # Location of path with all simulation configs
     CONFIG_PATH = '../script/config/simulation'
     CONFIG_NAME = 'default_simulation'
@@ -128,7 +141,7 @@ if __name__ == '__main__':
     PLANNER = 'lattice_idm_planner'  # [simple_planner, ml_planner, idm_planner, log_future_planner]
     CHALLENGE = 'closed_loop_reactive_agents'  # [closed_loop_nonreactive_agents, closed_loop_reactive_agents]
     DATASET_PARAMS = [
-        'scenario_builder=nuplan_mini',  # use nuplan mini database
+        'scenario_builder=nuplan_challenge',  # use nuplan mini database
         f'scenario_filter={BENCHMARK}',  # initially select all scenarios in the database
         # 'scenario_filter.scenario_types=[high_magnitude_speed]',  # select scenario types
         # 'scenario_filter.num_scenarios_per_type=20',  # use 10 scenarios per scenario type
